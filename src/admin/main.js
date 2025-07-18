@@ -3,5 +3,5 @@ import App from "./App.vue";
 
 new Vue({
   el: "#admin-app",
-  render: h => h(App)
+  render: (h) => h(App),
 });

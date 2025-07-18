@@ -10,20 +10,20 @@ const ESLintPlugin = require("eslint-webpack-plugin");
 
 module.exports = (env, argv) => {
   const isProductionBuild = argv.mode === "production";
-  const publicPath = './';
+  const publicPath = "./";
 
   const pcss = {
     test: /\.(p|post|)css$/,
     use: [
       isProductionBuild ? MiniCssExtractPlugin.loader : "vue-style-loader",
       "css-loader",
-      "postcss-loader"
-    ]
+      "postcss-loader",
+    ],
   };
 
   const vue = {
     test: /\.vue$/,
-    loader: "vue-loader"
+    loader: "vue-loader",
   };
 
   const js = {
@@ -31,17 +31,17 @@ module.exports = (env, argv) => {
     loader: "babel-loader",
     exclude: /node_modules/,
     options: {
-      presets: ['@babel/preset-env'],
-      plugins: ["@babel/plugin-syntax-dynamic-import"]
-    }
+      presets: ["@babel/preset-env"],
+      plugins: ["@babel/plugin-syntax-dynamic-import"],
+    },
   };
 
   const files = {
     test: /\.(png|jpe?g|gif|woff2?)$/i,
     loader: "file-loader",
     options: {
-      name: "[hash].[ext]"
-    }
+      name: "[hash].[ext]",
+    },
   };
 
   const svg = {
@@ -51,8 +51,8 @@ module.exports = (env, argv) => {
         loader: "svg-sprite-loader",
         options: {
           extract: true,
-          spriteFilename: svgPath => `sprite${svgPath.substr(-4)}`
-        }
+          spriteFilename: (svgPath) => `sprite${svgPath.substr(-4)}`,
+        },
       },
       "svg-transform-loader",
       {
@@ -62,13 +62,13 @@ module.exports = (env, argv) => {
             { removeTitle: true },
             {
               removeAttrs: {
-                attrs: "(fill|stroke)"
-              }
-            }
-          ]
-        }
-      }
-    ]
+                attrs: "(fill|stroke)",
+              },
+            },
+          ],
+        },
+      },
+    ],
   };
 
   const pug = {
@@ -76,74 +76,74 @@ module.exports = (env, argv) => {
     oneOf: [
       {
         resourceQuery: /^\?vue/,
-        use: ["pug-plain-loader"]
+        use: ["pug-plain-loader"],
       },
       {
-        use: ["pug-loader"]
-      }
-    ]
+        use: ["pug-loader"],
+      },
+    ],
   };
 
   const config = {
     entry: {
       main: "./src/main.js",
-      admin: "./src/admin/main.js"
+      admin: "./src/admin/main.js",
     },
     output: {
       path: path.resolve(__dirname, "./dist"),
       filename: "[name].[hash].build.js",
       publicPath: isProductionBuild ? publicPath : "",
-      chunkFilename: "[chunkhash].js"
+      chunkFilename: "[chunkhash].js",
     },
     module: {
-      rules: [pcss, vue, js, files, svg, pug]
+      rules: [pcss, vue, js, files, svg, pug],
     },
     resolve: {
       alias: {
         vue$: "vue/dist/vue.esm.js",
-        images: path.resolve(__dirname, "src/images")
+        images: path.resolve(__dirname, "src/images"),
       },
-      extensions: ["*", ".js", ".vue", ".json"]
+      extensions: ["*", ".js", ".vue", ".json"],
     },
     devServer: {
       historyApiFallback: true,
       noInfo: false,
-      overlay: true
+      overlay: true,
     },
     performance: {
-      hints: false
+      hints: false,
     },
     devtool: isProductionBuild ? false : "#eval-source-map",
     plugins: [
       new HtmlWebpackPlugin({
         template: "src/index.pug",
-        chunks: ["main"]
+        chunks: ["main"],
       }),
       new HtmlWebpackPlugin({
         template: "src/admin/index.pug",
         filename: "admin/index.html",
-        chunks: ["admin"]
+        chunks: ["admin"],
       }),
       new SpriteLoaderPlugin({ plainSprite: true }),
       new VueLoaderPlugin(),
       new ESLintPlugin({
         extensions: ["js", "vue"],
-        emitWarning: !isProductionBuild
-      })
-    ]
+        emitWarning: !isProductionBuild,
+      }),
+    ],
   };
 
   if (isProductionBuild) {
     config.plugins.push(
       new webpack.DefinePlugin({
         "process.env": {
-          NODE_ENV: '"production"'
-        }
+          NODE_ENV: '"production"',
+        },
       }),
       new MiniCssExtractPlugin({
         filename: "[name].[contenthash].css",
-        chunkFilename: "[contenthash].css"
-      })
+        chunkFilename: "[contenthash].css",
+      }),
     );
 
     config.optimization = {
@@ -152,11 +152,11 @@ module.exports = (env, argv) => {
           parallel: true,
           terserOptions: {
             compress: true,
-            mangle: true
-          }
+            mangle: true,
+          },
         }),
-        new OptimizeCSSAssetsPlugin({})
-      ]
+        new OptimizeCSSAssetsPlugin({}),
+      ],
     };
   }
 

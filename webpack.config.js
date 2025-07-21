@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const SpriteLoaderPlugin = require("svg-sprite-loader/plugin");
 const VueLoaderPlugin = require("vue-loader/lib/plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
+// const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 
@@ -30,10 +30,6 @@ module.exports = (env, argv) => {
     test: /\.js$/,
     loader: "babel-loader",
     exclude: /node_modules/,
-    options: {
-      presets: ["@babel/preset-env"],
-      plugins: ["@babel/plugin-syntax-dynamic-import"],
-    },
   };
 
   const files = {
@@ -107,13 +103,14 @@ module.exports = (env, argv) => {
     },
     devServer: {
       historyApiFallback: true,
-      noInfo: false,
-      overlay: true,
+      client: {
+        overlay: true,
+      },
     },
     performance: {
       hints: false,
     },
-    devtool: isProductionBuild ? false : "#eval-source-map",
+    devtool: isProductionBuild ? false : "eval-cheap-module-source-map",
     plugins: [
       new HtmlWebpackPlugin({
         template: "src/index.pug",
@@ -155,7 +152,7 @@ module.exports = (env, argv) => {
             mangle: true,
           },
         }),
-        new OptimizeCSSAssetsPlugin({}),
+        // new OptimizeCSSAssetsPlugin({}),
       ],
     };
   }

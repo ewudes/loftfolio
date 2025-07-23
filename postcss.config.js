@@ -1,31 +1,27 @@
-const fs = require("fs");
-
 module.exports = {
   syntax: "postcss-scss",
-  parser: "postcss-scss",
   plugins: [
     require("postcss-easy-import")({
-      extensions: ".pcss",
+      extensions: ".scss",
     }),
     require("autoprefixer")({
+      browsers: ["last 2 versions"],
       cascade: false,
     }),
     require("postcss-advanced-variables")({
-      variables: JSON.parse(
-        fs.readFileSync("./src/styles/variables.json", "utf-8"),
-      ),
+      variables: require("./src/assets/styles/variables"),
+    }),
+    require("postcss-pxtorem")({
+      selectorBlackList: ["html"],
     }),
     require("postcss-nested"),
     require("postcss-rgb"),
+    require("postcss-inline-comment"),
     require("postcss-inline-svg")({
       removeFill: true,
-      path: "./src/images/icons",
+      path: "./src/assets/images/icons",
     }),
-    require("cssnano"),
-    require("postcss-pxtorem")({
-      rootValue: 16,
-      propList: ["*", "!*border*"],
-      selectorBlackList: [/^html$/],
-    }),
+    require("postcss-svgo"),
+    require("cssnano")(),
   ],
 };

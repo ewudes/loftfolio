@@ -3,6 +3,7 @@ const webpack = require("webpack");
 const env = process.env.NODE_ENV;
 
 module.exports = {
+  mode: process.env.NODE_ENV || "development",
   entry: {
     about: "./src/assets/scripts/about.js",
     auth: "./src/assets/scripts/auth.js",
@@ -25,7 +26,7 @@ module.exports = {
   },
   optimization: {
     splitChunks: {
-      chunks: "all", // Чтобы заменить устаревший CommonsChunkPlugin
+      chunks: "all",
       name: false,
     },
     minimize: env === "production",
@@ -39,11 +40,6 @@ module.exports = {
       }),
     ],
   },
-  plugins: [
-    new webpack.DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify(env),
-    }),
-  ],
   resolve: {
     alias: {
       vue$:

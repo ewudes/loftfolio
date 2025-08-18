@@ -1,11 +1,12 @@
-.review{
+.review {
 	min-height: 1080px;
 	background-image: url(assets/images/bg/works-bg.jpg);
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: cover;
 }
-.review-titele{
+
+.review-titele {
 	margin: 40px auto 0;
 	min-height: 200px;
 	max-width: 530px;
@@ -14,21 +15,25 @@
 	background-repeat: no-repeat;
 	background-size: contain;
 }
-.review-wrap{
+
+.review-wrap {
 	display: flex;
 	flex-direction: column;
 	padding-top: 40px;
 }
-.review{
-	&__row{
+
+.review {
+	&__row {
 		display: flex;
 		justify-content: center;
 	}
-	&__descr{
+
+	&__descr {
 		display: flex;
 		margin-top: 30px;
 	}
-	&__descr-img{
+
+	&__descr-img {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -37,7 +42,8 @@
 		overflow: hidden;
 		border-radius: 50%;
 	}
-	&__descr-lbl{
+
+	&__descr-lbl {
 		display: flex;
 		flex-direction: column;
 		color: $green;
@@ -47,13 +53,15 @@
 			@include roboto(regular);
 		}
 	}
+
 	&__item {
 		position: relative;
 		max-width: 380px;
 		margin: 0 20px;
+
 		&:before {
 			content: '';
-			background-image: svg-load('quote.svg' fill='#eeebdf');
+			// background-image: svg-load('quote.svg' fill='#eeebdf');
 			background-repeat: no-repeat;
 			background-position: center;
 			position: absolute;
@@ -62,11 +70,13 @@
 			height: 40px;
 		}
 	}
+
 	&__btn {
 		margin: 100px auto 0;
 		transform: rotate(180deg);
 	}
-	&__form{
+
+	&__form {
 		display: flex;
 		position: relative;
 		flex-direction: column;
@@ -76,7 +86,8 @@
 		z-index: 10;
 		border-radius: 6px;
 		margin-top: 80px;
-		&:before{
+
+		&:before {
 			background: inherit;
 			bottom: 0;
 			content: '';
@@ -91,49 +102,60 @@
 		}
 	}
 }
-.review-form{
+
+.review-form {
 	display: flex;
 	flex-direction: column;
 	padding: 0 20px;
 	z-index: 20;
-	&__input, &__textarea{
+
+	&__input,
+	&__textarea {
 		margin: 10px 0;
 		border-radius: 6px;
 		border: 1px solid $beige;
 		padding: 15px 20px;
 		@include roboto(regular);
-		&::placeholder{
+
+		&::placeholder {
 			opacity: .5;
 		}
 	}
-	&__input{
+
+	&__input {
 		height: 40px;
 	}
-	&__textarea{
+
+	&__textarea {
 		height: 140px;
 		resize: none;
 	}
-	&__btns{
+
+	&__btns {
 		display: flex;
 		position: absolute;
 		bottom: 0;
 		left: 0;
 		width: 100%;
 	}
-	&__btn{
+
+	&__btn {
 		width: 50%;
 		height: 50px;
 		background-color: $green;
 		border-right: 1px solid $beige;
 		color: $white;
-		&:first-child{
+
+		&:first-child {
 			border-radius: 0 0 0 6px;
 		}
-		&:last-child{
+
+		&:last-child {
 			border: none;
 			border-radius: 0 0 6px 0;
 		}
-		&:hover{
+
+		&:hover {
 			background-color: $dark-green;
 		}
 	}

@@ -98,11 +98,13 @@ gulp.task("svg", (done) => {
 
 gulp.task("images", () => {
   return gulp
-    .src([
-      `${config.SRC_DIR}/images/**/*.*`,
-      `!${config.SRC_DIR}/images/icons/*.*`,
-    ])
-    .pipe($gp.if(env === "production", imagemin()))
+    .src(
+      [
+        `${config.SRC_DIR}/images/**/*.*`,
+        `!${config.SRC_DIR}/images/icons/*.*`,
+      ],
+      { encoding: false },
+    )
     .pipe(gulp.dest(`${config.DIST_DIR}/assets/images/`));
 });
 

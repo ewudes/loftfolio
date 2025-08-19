@@ -3,7 +3,7 @@
 	flex-direction: column;
 	min-height: 620px;
 	height: 100vh;
-	background-image: url(assets/images/bg/hero-bg.jpg);
+	background-image: url(../../../assets/images/bg/hero-bg.jpg);
 	background-repeat: no-repeat;
 	background-size: cover;
 	&__links{
@@ -42,7 +42,7 @@
 	position: absolute;
 	top: 0;
 	left: 0;
-	background-image: url(assets/images/decor/portfolio_header.png);
+	background-image: url(../../../assets/images/decor/portfolio_header.png);
 	background-position: center center;
 	background-repeat: no-repeat;
 	width: 100%;

@@ -1,6 +1,7 @@
 const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ESLintPlugin = require("eslint-webpack-plugin");
 
 module.exports = {
   entry: {
@@ -10,6 +11,12 @@ module.exports = {
     path: path.resolve(__dirname, "dist/admin"),
     filename: "[name].bundle.js",
   },
+  plugins: [
+    new ESLintPlugin({
+      extensions: ["js", "vue"], // какие файлы проверять
+      emitWarning: true,
+    }),
+  ],
   module: {
     rules: [
       {
@@ -24,7 +31,6 @@ module.exports = {
         enforce: "pre",
         test: /\.vue$/,
         exclude: /node_modules/,
-        loader: "eslint-loader",
       },
       {
         test: /\.vue$/,
@@ -57,13 +63,14 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    noInfo: false,
-    overlay: true,
+    client: {
+      overlay: true,
+    },
   },
   performance: {
     hints: false,
   },
-  devtool: "#eval-source-map",
+  devtool: "eval-cheap-module-source-map",
   plugins: [
     new HtmlWebpackPlugin({
       title: "Admin Vue App",

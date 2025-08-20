@@ -1,7 +1,6 @@
 const gulp = require("gulp");
 const config = require("./env.paths.json");
 const env = process.env.NODE_ENV;
-const imagemin = require("gulp-imagemin").default;
 
 const $gp = require("gulp-load-plugins")();
 

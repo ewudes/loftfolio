@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <meta content="ie=edge" http-equiv="x-ua-compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Portfolio | Обо мне</title>
+    <link rel="stylesheet" href="assets/css/main.min.css">
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="maincontent">
+        <section class="hero">
+          <div class="hero-row">
+            <div class="hero__links">
+              <ul class="socials socials__hero">
+                <li class="socials__link"><a class="socials__link" href="#">
+                    <svg class="socials__link-pic socials__link-pic_vk">
+                      <use xlink:href="/assets/images/icons/sprite.svg#vk"></use>
+                    </svg></a></li>
+                <li class="socials__link"><a class="socials__link" href="#">
+                    <svg class="socials__link-pic socials__link-pic_gh">
+                      <use xlink:href="/assets/images/icons/sprite.svg#github"></use>
+                    </svg></a></li>
+                <li class="socials__link"><a class="socials__link" href="#">
+                    <svg class="socials__link-pic socials__link-pic_in">
+                      <use xlink:href="/assets/images/icons/sprite.svg#in"></use>
+                    </svg></a></li>
+              </ul>
+            </div><a class="hamburger hero__menu" href="">
+              <svg class="hamburger-pic">
+                <use xlink:href="/assets/images/icons/sprite.svg#hamburger"></use>
+              </svg></a>
+          </div>
+          <div class="hero-row">
+            <div class="hero__title">
+              <div class="user hero__user">
+                <div class="user__pic"><img class="user__pic-img"></div>
+                <div class="user__description blog-description">
+                  <div class="block-title blog-title">БЛОГ</div>
+                  <div class="user__info blog-info">Статьи, которые я написал</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section class="blog">
+          <div class="blog__triangle">
+            <svg class="triangle triangle_fill" viewBox="0 80 100 10" preserveAspectRatio="none">
+              <polygon points="0,80 0,100 100,100"></polygon>
+              <polygon points="0,100 100,100 100,80"></polygon>
+            </svg>
+          </div>
+          <div class="blog__wrapper">
+            <div class="blog__wrap-left">
+              <nav class="blog__nav">
+                <ul class="blog__nav-list">
+                  <li class="blog__nav-item blog__nav-item--active">БЭМ для начинающих</li>
+                  <li class="blog__nav-item">Что такое Full-Stack разработка?</li>
+                  <li class="blog__nav-item">Самый необходимый набор Gulp плагинов</li>
+                  <li class="blog__nav-item">Почему я выбрал Jade</li>
+                  <li class="blog__nav-item">5 страхов веб-дизайнеров, связанных с CSS Grid</li>
+                </ul>
+              </nav>
+            </div>
+            <div class="blog__wrap-right">
+              <article class="blog__article">
+                <ul class="blog__article-list">
+                  <li class="blog__article-item">
+                    <div class="article__title">БЭМ для начинающих</div>
+                    <div class="article__date">15 июня 2018</div>
+                    <div class="article__text">
+                      <h3>В чем проблема CSS, почему нужны какие-то методы именования?</h3>
+                      <ol>
+                        <li>Отсутствие пространства имен дает возможность совпадения селекторов и их неожиданных влияний (наложение правил, зависимость одних частей страницы от других).</li>
+                        <li>Отсутствие изоляции: часть CSS-свойств наследуется, а ни один из нативных механизмов изоляции частей страницы сейчас не имеет приемлемой кроссбраузерности.</li>
+                        <li>CSS сложно понять без разметки, к которой он применен.</li>
+                        <li>В CSS поощряется каскад, использование которого связывает стилизацию и разметку, что усложняет модификацию и того, и другого.</li>
+                      </ol>
+                      <h3>Основы методологии БЭМ</h3>
+                      <ul>
+                        <li>Блок - абсолютно независимая, самодостаточная часть страницы.</li>
+                        <li>Элемент - часть блока, немыслимая отдельно от своего блока.</li>
+                        <li>Модификатор - дополнительный класс, добавление которого как-то меняет внешний вид или поведение блока или элемента.</li>
+                      </ul>
+                      <h3>Достоинства БЭМ</h3>
+                      <ol>
+                        <li>Полная предсказуемость модификации: меняем что-то в одном блоке, другие блоки не ломаются.</li>
+                        <li>Гарантия непересечения имен классов (пространство имен): нет наложений стилей.</li>
+                        <li>Нет привязки к разметке: легко менять теги, вложенность элементов.</li>
+                        <li>CSS понятен без HTML: быстрее понимание - быстрее работа.</li>
+                      </ol>
+                      <h3>Недостатки БЭМ</h3>
+                      <ol>
+                        <li>Наличие символов __ и -- в классах вызывают у некоторых эстетов отвращение. (Не такая уж большая плата за получаемые преимущества).</li>
+                        <li>Длинные имена классов увеличивают размер разметки. (Но прекрасно сжимаются gzip-ом).</li>
+                        <li>У тега может быть 2 и более класса: Блок, Модификатор-1, Модификатор-2. (Ситуация редкая, лучше объединять модификаторы, когда возможно).</li>
+                      </ol>
+                      <h3>Основные правила обеспечения модульности</h3>
+                      <ul>
+                        <li>Верстка должна быть модульной (любой блок можно вырвать из одного места страницы и вставить в другое, так что бы он не "развалился" и не поломал ничего вокруг)</li>
+                        <li>На странице нет "голых" тегов. Все теги имеют свой класс, и стилизируются конкретно по нему.</li>
+                        <li>Нет селекторов по тегам.</li>
+                        <li>Не использовать относительных селекторов (*, >, +, ~)</li>
+                        <li>Зависимость селекторов допускается только от модификаторов блока.</li>
+                        <li>Именование классов формируется по правилам синтаксиса БЭМ.</li>
+                        <li>Правила позиционирования не применяются к блокам</li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li class="blog__article-item">
+                    <div class="article__title">Что такое Full-Stack разработка?</div>
+                    <div class="article__date">15 июня 2018</div>
+                    <div class="article__text">
+                      <p>По результатам опроса Stack Overflow в 2016 году, Full-Stack разработка — это самое популярное занятие разработчиков. Поэтому неудивительно, что сейчас на западном рынке появляется все больше и больше обучающих программ, которые помогают людям стать Full-Stack разработчиками.</p>
+                      <p>Чтобы ответить на вопрос, что такое Full-Stack разработка, и кто такой Full-Stack разработчик, давайте рассмотрим, из чего вообще состоит современная веб-разработка.</p>
+                      <p>Современную веб-разработку можно разделить на две большие составляющие: Front-end и Back-end разработка.</p>
+                      <p>Front-end разработка (от слова front — «впереди») — то, что вы видите на сайте, его визуальная составляющая. Сюда входят HTML, CSS и по большей части JavaScript. В современной Front-end разработке сейчас актуальны и активно применяются несколько JavaScript фреймворков, из которых, в основном, выбирают Angular, Vue, React. У каждого есть свои плюсы и минусы, и выбирать нужно в зависимости от их области применения. Но здесь есть ключевой момент — вы, по сути, выбираете из JavaScript технологий, так как на данный момент JavaScript является монополистом в этой области.</p>
+                      <p>Back-end разработка — это серверная разработка (от слова back — «позади»), и она подразумевает под собой разработку логики вашего сайта, взаимодействие с базой данных и все то, что должно быть на сервере. В Back-end разработке вы можете выбирать из большего количества языков, которые подходят под разные задачи. Back-end вы можете писать, к примеру, на PHP, Java, Node.JS, Python, Ruby и так далее.</p>
+                    </div>
+                  </li>
+                  <li class="blog__article-item">
+                    <div class="article__title">Самый необходимый набор Gulp плагинов</div>
+                    <div class="article__date">15 июня 2018</div>
+                    <div class="article__text">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid debitis, et ex modi nostrum quibusdam ratione repellat. Aspernatur consequuntur ducimus eum ex explicabo illum in laudantium nisi perferendis voluptas? Ipsum.</p>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad cum, delectus eveniet neque nisi placeat saepe unde voluptatum. Commodi consectetur, consequatur dolorum iste possimus praesentium repellendus repudiandae soluta! Ad, temporibus?</p>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam, corporis, distinctio fugiat harum illo itaque nam natus numquam quae quibusdam quisquam quod rerum. Aperiam aspernatur consequatur hic, itaque minus odit?</p>
+                    </div>
+                  </li>
+                  <li class="blog__article-item">
+                    <div class="article__title">Почему я выбрал Jade</div>
+                    <div class="article__date">15 июня 2018</div>
+                    <div class="article__text">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum odio officiis repellat. Aliquid atque aut beatae commodi ipsam maiores maxime modi molestias, mollitia, natus nostrum officia perferendis quae quam voluptatibus!</p>
+                      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias delectus, dolorem doloribus ducimus enim ex fuga minima nemo nobis praesentium quae quaerat quibusdam, quidem quisquam quod reprehenderit sint tenetur unde.</p>
+                    </div>
+                  </li>
+                  <li class="blog__article-item">
+                    <div class="article__title">5 страхов веб-дизайнеров, связанных с CSS Grid</div>
+                    <div class="article__date">15 июня 2018</div>
+                    <div class="article__text">
+                      <p><span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto asperiores, aspernatur deleniti laborum minus ratione rerum sequi voluptate voluptatum! Consectetur consequuntur, cum doloremque doloribus inventore nihil ratione sed velit voluptas!</span><span>Aliquid architecto commodi consectetur deleniti doloremque ea et illo in ipsum, iure magnam molestiae molestias nemo nobis obcaecati, odio placeat recusandae repudiandae vel voluptas? Amet fugiat illo in sapiente sint!</span></p>
+                    </div>
+                  </li>
+                </ul>
+              </article>
+            </div>
+          </div>
+        </section>
+        <footer class="footer">
+          <div class="footer__row">
+            <div class="footer__col">
+              <nav class="menu">
+                <ul class="menu__list">
+                  <li class="menu__item"><a class="menu__link" href="">Мои работы</a></li>
+                  <li class="menu__item"><a class="menu__link" href="">Обо мне</a></li>
+                  <li class="menu__item"><a class="menu__link" href="">Блог</a></li>
+                  <li class="menu__item"><a class="menu__link" href="">Авторизация</a></li>
+                </ul>
+              </nav>
+            </div>
+            <div class="footer__col footer__col_justify_end">
+              <ul class="socials">
+                <li class="socials__link"><a class="socials__link socials__link_round" href="#">
+                    <svg class="socials__link-pic socials__link-pic_round socials__link-pic_vk">
+                      <use xlink:href="/assets/images/icons/sprite.svg#vk"></use>
+                    </svg></a></li>
+                <li class="socials__link"><a class="socials__link socials__link_round" href="#">
+                    <svg class="socials__link-pic socials__link-pic_round socials__link-pic_gh">
+                      <use xlink:href="/assets/images/icons/sprite.svg#github"></use>
+                    </svg></a></li>
+                <li class="socials__link"><a class="socials__link socials__link_round" href="#">
+                    <svg class="socials__link-pic socials__link-pic_round socials__link-pic_in">
+                      <use xlink:href="/assets/images/icons/sprite.svg#in"></use>
+                    </svg></a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer__row">
+            <div class="footer__col">
+              <p>Я веб-разработчик из Новосибирска, и этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool.</p>
+            </div>
+            <div class="footer__col footer__col_justify_end">
+              <p>&copy Владимир Астахов | создано с любовью в LoftSchool | 2016</p>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <script src="assets/js/vendor.bundle.js"></script>
+    <script src="assets/js/about.bundle.js"></script>
+  </body>
+</html>

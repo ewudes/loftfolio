@@ -1,9 +1,12 @@
+const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
 const webpack = require("webpack");
+
 const env = process.env.NODE_ENV;
+const isProd = env === "production";
 
 module.exports = {
-  mode: process.env.NODE_ENV || "development",
+  mode: isProd ? "production" : "development",
   entry: {
     about: "./src/assets/scripts/about.js",
     auth: "./src/assets/scripts/auth.js",
@@ -12,8 +15,10 @@ module.exports = {
     vendor: ["vue"],
   },
   output: {
+    path: path.resolve(__dirname, "dist/assets/scripts"),
     filename: "[name].bundle.js",
     chunkFilename: "[name].bundle.js",
+    clean: true,
   },
   module: {
     rules: [
@@ -29,7 +34,7 @@ module.exports = {
       chunks: "all",
       name: false,
     },
-    minimize: env === "production",
+    minimize: isProd,
     minimizer: [
       new TerserPlugin({
         terserOptions: {
@@ -42,9 +47,16 @@ module.exports = {
   },
   resolve: {
     alias: {
-      vue$:
-        env === "development" ? "vue/dist/vue.esm.js" : "vue/dist/vue.min.js",
+      vue$: isProd
+        ? "vue/dist/vue.esm-bundler.js"
+        : "vue/dist/vue.esm-bundler.js",
     },
+    extensions: [".js", ".vue", ".json"],
   },
-  devtool: env === "development" ? "eval-source-map" : false,
+  devtool: isProd ? "source-map" : "eval-cheap-module-source-map",
+  plugins: [
+    new webpack.DefinePlugin({
+      "process.env.NODE_ENV": JSON.stringify(env),
+    }),
+  ],
 };

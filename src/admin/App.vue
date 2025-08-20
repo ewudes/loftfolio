@@ -1,5 +1,5 @@
 <template lang="pug">
-  app-title
+  <app-title></app-title>
 </template>
 
 <script>

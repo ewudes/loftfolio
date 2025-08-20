@@ -5,12 +5,17 @@
   "scripts": {
     "dev:mpa": "cross-env NODE_ENV=development gulp",
     "dev:spa": "cross-env NODE_ENV=development webpack-dev-server --config webpack.spa.config.js --open --hot",
-    "build": "cross-env NODE_ENV=production gulp build; cross-env NODE_ENV=production webpack --config webpack.spa.config.js --progress",
-    "reg": "node reg-util.js"
+    "build": "cross-env NODE_ENV=production gulp build && cross-env NODE_ENV=production webpack --config webpack.spa.config.js --progress",
+    "reg": "node reg-util.js",
+    "start": "npm run build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "engines": {
+    "node": "23.3.0",
+    "npm": "10.1.0"
+  },
   "devDependencies": {
     "@babel/core": "^7.24.0",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
@@ -66,7 +71,8 @@
     "webpack": "^5.100.2",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.2.2",
-    "webpack-stream": "^7.0.0"
+    "webpack-stream": "^7.0.0",
+    "cross-env": "^7.0.3"
   },
   "browserslist": [
     "> 0.5%",
@@ -80,7 +86,6 @@
     "request": "^2.88.2",
     "signale": "^1.4.0",
     "vue": "^3.0.0",
-    "vue-router": "^3.6.5",
-    "cross-env": "^7.0.3"
+    "vue-router": "^3.6.5"
   }
 }

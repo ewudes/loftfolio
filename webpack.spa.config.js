@@ -2,6 +2,7 @@ const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
+const { VueLoaderPlugin } = require("vue-loader");
 
 module.exports = {
   entry: {
@@ -28,11 +29,6 @@ module.exports = {
         use: ["vue-style-loader", "css-loader", "postcss-loader"],
       },
       {
-        enforce: "pre",
-        test: /\.vue$/,
-        exclude: /node_modules/,
-      },
-      {
         test: /\.vue$/,
         loader: "vue-loader",
         options: {
@@ -57,9 +53,9 @@ module.exports = {
   },
   resolve: {
     alias: {
-      vue$: "vue/dist/vue.esm.js",
+      vue$: "vue/dist/vue.esm-bundler.js", // для Vue 3
     },
-    extensions: ["*", ".js", ".vue", ".json"],
+    extensions: [".js", ".vue", ".json"], // убираем "*"
   },
   devServer: {
     historyApiFallback: true,
@@ -77,6 +73,7 @@ module.exports = {
       filename: "index.html",
       template: path.resolve(__dirname, "src/admin/index.html"),
     }),
+    new VueLoaderPlugin(),
   ],
 };
 

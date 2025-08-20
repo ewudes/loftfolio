@@ -1,35 +1,28 @@
 const gulp = require("gulp");
 const config = require("./env.paths.json");
-const env = process.env.NODE_ENV;
+const env = process.env.NODE_ENV || "production";
 
 const $gp = require("gulp-load-plugins")();
-
 const browserSync = require("browser-sync").create();
 const reload = browserSync.reload;
 const $webpack = require("webpack-stream");
 const webpack = require("webpack");
 const del = require("del");
 
+gulp.task("clean", () => {
+  return del(config.DIST_DIR, { force: true });
+});
+
 gulp.task("styles", () => {
   return gulp
     .src(`${config.SRC_DIR}/styles/main.scss`)
-    .pipe($gp.sourcemaps.init())
     .pipe($gp.plumber())
     .pipe($gp.postcss(require("./postcss.config")))
     .pipe($gp.rename("main.min.css"))
+    .pipe($gp.if(env === "development", $gp.sourcemaps.init()))
     .pipe($gp.if(env === "development", $gp.sourcemaps.write()))
     .pipe(gulp.dest(`${config.DIST_DIR}/assets/css/`))
     .pipe(reload({ stream: true }));
-});
-
-gulp.task("fonts", () => {
-  return gulp
-    .src(`${config.SRC_DIR}/fonts/**`)
-    .pipe(gulp.dest(`${config.DIST_DIR}/assets/fonts/`));
-});
-
-gulp.task("clean", () => {
-  return del(config.ROOT_PATH);
 });
 
 gulp.task("scripts", () => {
@@ -50,29 +43,23 @@ gulp.task("pug", () => {
     .pipe(reload({ stream: true }));
 });
 
-gulp.task("server", () => {
-  browserSync.init({
-    server: {
-      baseDir: `${config.DIST_DIR}`,
-    },
-    open: false,
-  });
+gulp.task("images", () => {
+  return gulp
+    .src([
+      `${config.SRC_DIR}/images/**/*.*`,
+      `!${config.SRC_DIR}/images/icons/*.*`,
+    ])
+    .pipe(gulp.dest(`${config.DIST_DIR}/assets/images/`));
 });
 
-gulp.task("svg", (done) => {
+gulp.task("svg", () => {
   return gulp
     .src(`${config.SRC_DIR}/images/icons/*.svg`)
-    .pipe(
-      $gp.svgmin({
-        js2svg: {
-          pretty: true,
-        },
-      }),
-    )
+    .pipe($gp.svgmin({ js2svg: { pretty: true } }))
     .pipe(
       $gp.cheerio({
         run($) {
-          $("[fill], [stroke], [style], [width], [height]")
+          $("[fill],[stroke],[style],[width],[height]")
             .removeAttr("fill")
             .removeAttr("stroke")
             .removeAttr("style")
@@ -83,53 +70,38 @@ gulp.task("svg", (done) => {
       }),
     )
     .pipe($gp.replace("&gt;", ">"))
-    .pipe(
-      $gp.svgSprite({
-        mode: {
-          symbol: {
-            sprite: "../sprite.svg",
-          },
-        },
-      }),
-    )
+    .pipe($gp.svgSprite({ mode: { symbol: { sprite: "../sprite.svg" } } }))
     .pipe(gulp.dest(`${config.DIST_DIR}/assets/images/icons`));
 });
 
-gulp.task("images", () => {
+gulp.task("fonts", () => {
   return gulp
-    .src(
-      [
-        `${config.SRC_DIR}/images/**/*.*`,
-        `!${config.SRC_DIR}/images/icons/*.*`,
-      ],
-      { encoding: false },
-    )
-    .pipe(gulp.dest(`${config.DIST_DIR}/assets/images/`));
+    .src(`${config.SRC_DIR}/fonts/**`)
+    .pipe(gulp.dest(`${config.DIST_DIR}/assets/fonts/`));
 });
-
-gulp.task("watch", () => {
-  gulp.watch(`${config.SRC_DIR}/styles/**/*.scss`, gulp.series("styles"));
-  gulp.watch(`${config.SRC_DIR}/images/**/*.*`, gulp.series("images"));
-  gulp.watch(`${config.SRC_DIR}/scripts/**/*.js`, gulp.series("scripts"));
-  gulp.watch(`${config.SRC_DIR}/fonts/*`, gulp.series("fonts"));
-  gulp.watch(`${config.VIEWS_DIR}/**/*.pug`, gulp.series("pug"));
-});
-
-gulp.task(
-  "default",
-  gulp.series(
-    "clean",
-    "svg",
-    gulp.parallel("styles", "pug", "images", "fonts", "scripts"),
-    gulp.parallel("watch", "server"),
-  ),
-);
 
 gulp.task(
   "build",
   gulp.series(
     "clean",
     "svg",
-    gulp.parallel("styles", "pug", "images", "fonts", "scripts"),
+    gulp.parallel("styles", "scripts", "pug", "images", "fonts"),
   ),
 );
+
+gulp.task("server", () => {
+  browserSync.init({
+    server: { baseDir: config.DIST_DIR },
+    open: false,
+  });
+});
+
+gulp.task("watch", () => {
+  gulp.watch(`${config.SRC_DIR}/styles/**/*.scss`, gulp.series("styles"));
+  gulp.watch(`${config.SRC_DIR}/scripts/**/*.js`, gulp.series("scripts"));
+  gulp.watch(`${config.VIEWS_DIR}/**/*.pug`, gulp.series("pug"));
+  gulp.watch(`${config.SRC_DIR}/images/**/*.*`, gulp.series("images"));
+  gulp.watch(`${config.SRC_DIR}/fonts/*`, gulp.series("fonts"));
+});
+
+gulp.task("default", gulp.series("build", gulp.parallel("watch", "server")));

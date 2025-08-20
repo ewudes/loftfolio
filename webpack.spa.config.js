@@ -4,6 +4,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ESLintPlugin = require("eslint-webpack-plugin");
 const { VueLoaderPlugin } = require("vue-loader");
 
+const isProd = process.env.NODE_ENV === "production";
+
 module.exports = {
   entry: {
     admin: path.resolve(__dirname, "src/admin/main.js"),
@@ -11,13 +13,14 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist/admin"),
     filename: "[name].bundle.js",
+    clean: true, // очищает dist при сборке
   },
-  plugins: [
-    new ESLintPlugin({
-      extensions: ["js", "vue"], // какие файлы проверять
-      emitWarning: true,
-    }),
-  ],
+  resolve: {
+    alias: {
+      vue$: "vue/dist/vue.esm-bundler.js",
+    },
+    extensions: [".js", ".vue", ".json"],
+  },
   module: {
     rules: [
       {
@@ -31,11 +34,6 @@ module.exports = {
       {
         test: /\.vue$/,
         loader: "vue-loader",
-        options: {
-          loaders: {
-            scss: ["vue-style-loader", "css-loader", "postcss-loader"],
-          },
-        },
       },
       {
         test: /\.js$/,
@@ -51,12 +49,28 @@ module.exports = {
       },
     ],
   },
-  resolve: {
-    alias: {
-      vue$: "vue/dist/vue.esm-bundler.js", // для Vue 3
-    },
-    extensions: [".js", ".vue", ".json"], // убираем "*"
-  },
+  plugins: [
+    new ESLintPlugin({
+      extensions: ["js", "vue"],
+      emitWarning: true,
+    }),
+    new HtmlWebpackPlugin({
+      title: "Admin Vue App",
+      filename: "index.html",
+      template: path.resolve(__dirname, "src/admin/index.html"),
+    }),
+    new VueLoaderPlugin(),
+    ...(isProd
+      ? [
+          new webpack.DefinePlugin({
+            "process.env.NODE_ENV": JSON.stringify("production"),
+          }),
+          new webpack.LoaderOptionsPlugin({
+            minimize: true,
+          }),
+        ]
+      : []),
+  ],
   devServer: {
     historyApiFallback: true,
     client: {
@@ -66,39 +80,5 @@ module.exports = {
   performance: {
     hints: false,
   },
-  devtool: "eval-cheap-module-source-map",
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: "Admin Vue App",
-      filename: "index.html",
-      template: path.resolve(__dirname, "src/admin/index.html"),
-    }),
-    new VueLoaderPlugin(),
-  ],
+  devtool: isProd ? "source-map" : "eval-cheap-module-source-map",
 };
-
-if (process.env.NODE_ENV) {
-  module.exports.entry = Object.assign(module.exports.entry, {
-    admin: path.resolve(__dirname, "src/admin/main.js"),
-  });
-}
-
-if (process.env.NODE_ENV === "production") {
-  module.exports.devtool = "";
-  module.exports.plugins = (module.exports.plugins || []).concat([
-    new webpack.DefinePlugin({
-      "process.env": {
-        NODE_ENV: '"production"',
-      },
-    }),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-      compress: {
-        warnings: false,
-      },
-    }),
-    new webpack.LoaderOptionsPlugin({
-      minimize: true,
-    }),
-  ]);
-}

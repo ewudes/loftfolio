@@ -5,7 +5,7 @@
   "scripts": {
     "dev:mpa": "cross-env NODE_ENV=development gulp",
     "dev:spa": "cross-env NODE_ENV=development webpack-dev-server --config webpack.spa.config.js --open --hot",
-    "build": "mkdir -p dist && gulp build",
+    "build": "gulp build",
     "build:spa": "cross-env NODE_ENV=production gulp build && cross-env NODE_ENV=production webpack --config webpack.spa.config.js --progress",
     "reg": "node reg-util.js"
   },

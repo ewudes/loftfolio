@@ -1,14 +1,10 @@
 [build]
-  # Команда для сборки всего проекта
   command = "npm run build"
-  # Папка, которую Netlify будет публиковать
   publish = "dist"
 
-# Можно задать переменные окружения, если нужно
 [build.environment]
   NODE_ENV = "production"
 
-# Настройки редиректов (например, для SPA)
 [[redirects]]
   from = "/*"
   to = "/index.html"

@@ -7,7 +7,7 @@
     "dev:spa": "cross-env NODE_ENV=development webpack-dev-server --config webpack.spa.config.js --hot",
     "build:mpa": "gulp build",
     "build:spa": "cross-env NODE_ENV=production gulp build && cross-env NODE_ENV=production webpack --config webpack.spa.config.js --progress",
-    "build": "npm run build:mpa && npm run build:spa",
+    "build": "npm run build:mpa; npm run build:spa",
     "reg": "node reg-util.js"
   },
   "keywords": [],

@@ -1,0 +1,77 @@
+<template lang="pug">
+.tabs
+  ul.tabs__list
+    li.tabs__item(
+      v-for="tab in tabs"
+      :key="tab.href"
+      :class='{"tabs__item--active": isActive(tab.href)}'
+    )
+      router-link(:to="tab.href").tabs__link {{ tab.title }}
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      tabs: [
+        { title: "Обо мне", href: "/admin" },
+        { title: "Блог", href: "/admin/blog" },
+        { title: "Работы", href: "/admin/works" },
+      ],
+    };
+  },
+  methods: {
+    isActive(href) {
+      return this.$route.path === href;
+    },
+  },
+};
+</script>
+
+<style lang="scss">
+@import "../../assets/styles/layout/mixins";
+
+.tabs {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.tabs__list {
+  background-color: #f0efe9;
+  display: flex;
+  flex-wrap: nowrap;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  @include phones {
+    flex-direction: column;
+  }
+}
+.tabs__item {
+  background-color: #f0efe9;
+  border-right: 2px solid $white;
+  transition: 0.3s;
+  &--active,
+  &:hover {
+    background-color: $white;
+    .tabs__link {
+      color: $pale-green;
+    }
+  }
+  @include tablets {
+    flex: 1;
+    text-align: center;
+  }
+  @include phones {
+    border-right: none;
+    border-top: 2px solid $white;
+  }
+}
+.tabs__link {
+  text-decoration: none;
+  padding: 20px 70px;
+  display: block;
+  color: #566358;
+  font-weight: bold;
+}
+</style>

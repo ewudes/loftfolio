@@ -45,10 +45,13 @@ gulp.task("pug", () => {
 
 gulp.task("images", () => {
   return gulp
-    .src([
-      `${config.SRC_DIR}/images/**/*.*`,
-      `!${config.SRC_DIR}/images/icons/*.*`,
-    ])
+    .src(
+      [
+        `${config.SRC_DIR}/images/**/*.*`,
+        `!${config.SRC_DIR}/images/icons/*.*`,
+      ],
+      { encoding: false },
+    )
     .pipe(gulp.dest(`${config.DIST_DIR}/assets/images/`));
 });
 

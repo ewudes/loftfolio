@@ -1,4 +1,4 @@
-.auth-block{
+.auth-block {
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -8,13 +8,15 @@
 	background-position: center center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	&__content{
+
+	&__content {
 		background-color: $white;
 		width: 380px;
 		height: 375px;
 		border-radius: 5px;
 	}
-	&__btns{
+
+	&__btns {
 		display: flex;
 		justify-content: center;
 		align-items: center;
@@ -23,18 +25,20 @@
 		background: $green;
 		border-radius: 0 0 5px 5px;
 	}
-	&__user{
+
+	&__user {
 		height: 300px;
 	}
-	&__socials{
+
+	&__socials {
 		display: flex;
 		justify-content: center;
 		padding: 15px 0;
 	}
 }
 
-.auth{
-	&__btn{
+.auth {
+	&__btn {
 		width: 33.3%;
 		text-align: center;
 		line-height: 45px;
@@ -44,19 +48,23 @@
 		cursor: pointer;
 		border-right: 1px solid $beige;
 		text-decoration: none;
-		&:last-child{
+
+		&:last-child {
 			border:none;
 		}
-		&:hover{
+
+		&:hover {
 			background-color: #009688;
 			border-radius: 0 0 5px 5px;
 		}
 	}
-	&__info{
+
+	&__info {
 		opacity: .8;
 	}
 }
-.auth-login-btns{
+
+.auth-login-btns {
 	position: absolute;
 	top: 0;
 	right: 0;
@@ -66,22 +74,32 @@
 	border-radius: 5px;
 	margin: 25px 20px 0 0;
 	cursor: pointer;
-	&:hover{
+
+	&:hover {
 		background-color: $white;
 	}
 }
-.login-btn{
+
+.login-btn {
 	color: $white;
 	text-align: center;
 	@include roboto(medium);
 	line-height: 45px;
+
 	&:hover{
 		color: $grey;
 	}
 }
-.auth-footer{
+
+.auth-footer {
 	position: absolute;
 	bottom: 0;
 	color: $white;
+	text-align: center;
 	margin-bottom: 35px;
+
+	& > a {
+		color: $white;
+		margin-left: 10px;
+	}
 }

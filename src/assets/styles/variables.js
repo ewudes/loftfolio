@@ -17,4 +17,11 @@ module.exports = {
   "dark-green": "#268c8b",
   "light-beige": "#efebe0",
   "phones-small": "375px",
+
+  "accent-bg-color": "#00bfa5",
+  "hover-bg-color": "#009688",
+  "side-bg-color": "#455a64",
+  "dark-bg-color": "#373e42",
+
+  "accent-font-color": "#00bfa5",
 };

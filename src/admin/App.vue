@@ -48,7 +48,7 @@ body {
   overflow: hidden;
   min-height: 100%;
   position: relative;
-  background-image: url("../assets/images/bg/auth-bg.jpg");
+  background-image: url("../assets/images/bg/auth-bg.png");
   background-repeat: no-repeat;
   -webkit-background-size: cover;
   background-size: cover;

@@ -1,15 +1,20 @@
 .socials {
 	display: flex;
 	height: 30px;
-	&__hero{
+
+	&__hero {
 		margin: 30px 0 0 15px;
 	}
-	&__link{
-		display: inline-block;
+
+	&__link {
+		display: flex;
+		justify-content: center;
+		align-items: center;
 		width: 40px;
 		height: 40px;
 		margin: 0 15px;
-		&_round{
+
+		&_round {
 			display: flex;
 			justify-content: center;
 			align-items: center;
@@ -17,28 +22,36 @@
 			height: 40px;
 			border: 1px solid $white;
 			border-radius: 50%;
-			&:hover{
+
+			&:hover {
 				background-color: $white;
 			}
 		}
 	}
-	&__link-pic{
-		display: inline-block;
-		width: 30px;
-		height: 30px;
+
+	&__link-pic {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 40px;
+		height: 40px;
 		background-repeat: no-repeat;
 		background-position: center center;
 		fill: $white;
 		opacity: .5;
-		&:hover{
+
+		&:hover {
 			opacity: 1;
 		}
-		&_auth{
-			fill: $green;
+
+		&_auth {
+			fill: $accent-bg-color;
 		}
+
 		&_round {
 			width: 25px;
 			height: 25px;
+
 			&:hover {
 				fill: $grey;
 			}

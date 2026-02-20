@@ -23,7 +23,7 @@
     "@babel/preset-env": "^7.28.0",
     "@vue/compiler-sfc": "^3.5.18",
     "acorn": "^8.11.3",
-    "ajv": "^8.17.1",
+    "ajv": "^8.18.0",
     "ajv-keywords": "^5.1.0",
     "autoprefixer": "^10.4.19",
     "axios-mock-adapter": "^2.1.0",
